@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzf.game.mapper.BigTypeMapper">
+  <resultMap id="BaseBigTypeMap" type="com.fzf.game.domain.entity.BigType">
+    <id column="big_type_id" jdbcType="INTEGER" property="bigTypeId" />
+    <result column="big_type_name" jdbcType="VARCHAR" property="bigTypeName" />
+  </resultMap>
+
+  <resultMap id="AllTypeResult" type="com.fzf.game.domain.vo.BigTypeVo" extends="BaseBigTypeMap">
+    <collection property="smallTypeList"
+                ofType="com.fzf.game.domain.vo.SmallTypeVo"
+                resultMap="com.fzf.game.mapper.SmallTypeMapper.BaseSmallVo">
+    </collection>
+  </resultMap>
+
+
+  <select id="findAll" resultMap="AllTypeResult">
+      SELECT *
+      FROM category c
+      LEFT JOIN  sub_menu sm ON c.cate_id = sm.cate_id
+      LEFT JOIN sub_menu1 sm1 ON sm.sub_menu_id = sm1.sub_menu_id
+  </select>
+  <select id="findByBigTypeId" resultMap="com.fzf.game.mapper.ShopMapper.BaseShopMap">
+    SELECT *
+    from big_type b
+    left JOIN shop s on s.big_type_id =b.big_type_id
+    where b.big_type_id= #{bigTypeId}
+    limit #{page},#{size}
+  </select>
+  <select id="findBySmallTypeId" resultMap="com.fzf.game.mapper.ShopMapper.BaseShopMap">
+      SELECT *
+      from big_type b
+      right join shop s on s.big_type_id =b.big_type_id
+      LEFT JOIN small_type s1 on s1.big_type_id= b.big_type_id
+      LEFT JOIN concrete_type c on c.small_type_id = s1.small__type_id
+      where s.shop_id=c.shop_id
+      and c.small_type_id =#{smallTypeId}
+      limit #{page},#{size}
+  </select>
+
+</mapper>
