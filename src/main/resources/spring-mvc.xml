@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+<!--开启springmvc 的注解-->
+<context:component-scan base-package="com.fzf.game"/>
+
+
+<mvc:annotation-driven>
+    <!-- 消息转化器  -->
+    <mvc:message-converters register-defaults="false">
+        <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+            <!-- 加入支持的媒体类型：返回contentType -->
+            <property name="supportedMediaTypes">
+                <list>
+                    <!-- 这里顺序不能反，一定先写text/html,不然IE下会出现下载提示 -->
+                    <value>text/html;charset=UTF-8</value>
+                    <value>application/json;charset=UTF-8</value>
+                </list>
+            </property>
+            <property name="fastJsonConfig">
+                <bean class="com.alibaba.fastjson.support.config.FastJsonConfig">
+                    <property name="features">
+                        <list>
+                            <value>AllowArbitraryCommas</value>
+                            <value>AllowUnQuotedFieldNames</value>
+                            <value>DisableCircularReferenceDetect</value>
+                        </list>
+                    </property>
+                    <!--配置特定的日期格式-->
+                    <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
+                </bean>
+            </property>
+        </bean>
+    </mvc:message-converters>
+</mvc:annotation-driven>
+
+<!--<mvc:interceptors>-->
+<!--    &lt;!&ndash;        拦截 所有的请求  对所有的请求 做性能检查 &ndash;&gt;-->
+<!--    <bean class="com.qf.ssm.interceptor.PerformanceInterceptor"/>-->
+<!--    &lt;!&ndash;        表示所有服务器的所有请求&ndash;&gt;-->
+<!--    &lt;!&ndash;        <bean  id="" class="com.vip.mvc.interceptor.LoginInterceptor" />&ndash;&gt;-->
+<!--    <mvc:interceptor    >-->
+<!--        &lt;!&ndash;             三个匹配符-->
+<!--                            ?-->
+<!--                            *  匹配当前0个或者多个字符-->
+<!--                            ** 匹配0个或者多个 包括子目录-->
+<!--        &ndash;&gt;-->
+<!--        &lt;!&ndash; 表拦截的路径  &ndash;&gt;-->
+<!--        &lt;!&ndash;            admin开头的路径包括路径-->
+<!--                         /admin/shop/xx-->
+<!--                         /admin/user/sss-->
+<!--        &ndash;&gt;-->
+<!--        <mvc:mapping path="/admin/**"/>-->
+<!--        &lt;!&ndash;            排除 &ndash;&gt;-->
+<!--        <mvc:exclude-mapping path="/login"/>-->
+<!--        <bean class="com.qf.ssm.interceptor.LoginInterceptor"/>-->
+<!--    </mvc:interceptor>-->
+<!--</mvc:interceptors>-->
+
+
+</beans>
