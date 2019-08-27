@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzf.game.mappers.ActivityMapper">
+    <resultMap id="Activity_ResultMapper" type="Activity">
+        <id property="activityId" column="activity_id"/>
+        <result property="activityTypeId" column="activity_type_id"/>
+        <result property="activityName" column="activity_name"/>
+        <result property="activityCreateTime" column="activity_create_time"/>
+        <result property="activityDeadTime" column="activity_dead_time"/>
+        <result property="activityIntroduce" column="activity_introduce"/>
+        <result property="activityTitle" column="activity_title"/>
+        <result property="activityImage" column="activity_image"/>
+        <result property="rewordImage" column="reword_image"/>
+        <result property="isDelete" column="is_delete"/>
+    </resultMap>
+
+    <select id="queryActivity" resultMap="Activity_ResultMapper">
+        select a.activity_name,a.activity_create_time,a.activity_dead_time,a.reword_image
+        from activity a
+        where a.activity_type_id=#{typeId} and a.is_delete =0
+    </select>
+
+</mapper>

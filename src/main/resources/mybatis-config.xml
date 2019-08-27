@@ -2,13 +2,4 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
-    <!--<settings>-->
-    <!--    开启延迟  -->
-    <!--    <setting name="lazyLoadingEnabled" value="true"/>-->
-    <!--  积极加载  -->
-    <!--    <setting name="aggressiveLazyLoading" value="true"/>-->
-
-    <!--</settings>-->
-
 </configuration>

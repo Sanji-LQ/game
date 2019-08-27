@@ -4,30 +4,25 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--        spring 加载 properties 配置文件  -->
-    <context:property-placeholder  location="classpath:/config/db.properties"/>
-
-    <!--注册所有Dao接口-->
-    <!--    <mybatis:scan base-package="com.qf.ssm.mapper"/>-->
-
-    <!--    1  初始化 SqlSessionFactory -->
+    <!-- spring 加载properties文件-->
+    <context:property-placeholder location="classpath:/config/db.properties"/>
+    <!-- 自动扫描包 -->
+    <!-- 1  初始化 SqlSessionFactory -->
     <bean class="org.mybatis.spring.SqlSessionFactoryBean">
-        <!--            初始化 配置数据库连接池-->
+        <!--  初始化 配置数据库连接池-->
         <property name="dataSource" ref="dataSource"/>
         <!--  3 加载主配置文件-->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!-- 4 注册 所有的mapper.xml-->
-        <property name="mapperLocations" value="classpath:mappers/**/*.xml" />
-
+        <property name="mapperLocations" value="classpath:mapper/**/*.xml" />
+        <!--  别名-->
         <property name="typeAliasesPackage" value="com.fzf.game.domain.entity"/>
     </bean>
-
     <!-- 5  注册  注册的Mapper.java -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.fzf.game.mapper"/>
+        <property name="basePackage" value="com.fzf.game.mappers"/>
     </bean>
-
-    <!--     2 配置 druid    -->
+    <!--  2 配置 druid -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 
         <property name="url" value="${db.url}" />

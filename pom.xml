@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.fzf</groupId>
-  <artifactId>game</artifactId>
+  <groupId>vip.com</groupId>
+  <artifactId>SSM-Project-Ex1</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>game Maven Webapp</name>
+  <name>SSM-Project-Ex1 Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -19,6 +19,14 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <spring.version>5.1.9.RELEASE</spring.version>
     <mybatis.version>3.5.2</mybatis.version>
+    <mybatis-spring.version>2.0.2</mybatis-spring.version>
+    <lombok.version>1.18.8</lombok.version>
+    <slf4j.version>1.7.28</slf4j.version>
+    <logback.version>1.2.3</logback.version>
+    <druid.version>1.1.19</druid.version>
+    <mysql.version>8.0.17</mysql.version>
+    <servlet.version>4.0.1</servlet.version>
+    <fastjson.version>1.2.59</fastjson.version>
   </properties>
 
   <dependencies>
@@ -28,114 +36,97 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
-
-    <!--1、spring+springmvc-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <!--切面-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aspects</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
+    <!-- spring测试包 -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
       <version>${spring.version}</version>
       <scope>test</scope>
     </dependency>
-
-    <!--2、整合第三方orm框架-->
+    <!--1.Spring +Spring MVC-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <!--2. 整合第三方orm框架(主要是看兼容习惯)-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
       <version>${spring.version}</version>
     </dependency>
-
-    <!--3、mybatis-->
+    <!--3.mybatis-->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
-      <version>3.5.2</version>
+      <version>${mybatis.version}</version>
     </dependency>
-
     <!--mybatis支持spring-->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
-      <version>2.0.2</version>
+      <version>${mybatis-spring.version}</version>
     </dependency>
-
-    <!--4、lombok日志，生成get、set方法-->
+    <!--4、lombok日志(生成geter setter 方法)-->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.8</version>
-      <scope>provided</scope>
+      <version>${lombok.version}</version>
     </dependency>
-
-    <!--    5、日志接口包-->
+    <!--5、日志接口包（log.debug这个方法-->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
-      <version>1.7.28</version>
-      <scope>test</scope>
+      <version>${slf4j.version}</version>
     </dependency>
-
-    <!--    logback包-->
+    <!--logback包-->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.2.3</version>
-      <!--      <scope>test</scope>-->
+      <version>${logback.version}</version>
     </dependency>
-
+    <!--logback包配套的-->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-access</artifactId>
-      <version>1.2.3</version>
+      <version>${logback.version}</version>
     </dependency>
-
-    <!-- 6、连接池 -->
+    <!--6、连接池-->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>
-      <version>1.1.19</version>
+      <version>${druid.version}</version>
     </dependency>
-
     <!--7、数据库驱动-->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.17</version>
+      <version>${mysql.version}</version>
     </dependency>
-    <!--  8 serlvet 包-->
+    <!--8、serlvet包-->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.1</version>
-      <scope>provided</scope>
+      <version>${servlet.version}</version>
     </dependency>
-    <!--   9 fastjson 工具 -->
+    <!--9、fastjson 工具-->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
-      <version>1.2.59</version>
+      <version>${fastjson.version}</version>
     </dependency>
-    <!--解决跨域请求工具类-->
+    <!--10、解决跨域请求-->
     <dependency>
       <groupId>com.thetransactioncompany</groupId>
       <artifactId>cors-filter</artifactId>
       <version>1.3.2</version>
     </dependency>
 
+
   </dependencies>
 
   <build>
-    <finalName>game</finalName>
+    <finalName>SSM-Project-Ex1</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>

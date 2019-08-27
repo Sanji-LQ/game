@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzf.game.mappers.ActivityTypeMapper">
+    <resultMap id="ActivityType_ResultMap" type="ActivityType">
+        <id property="activityTypeId" column="activity_type_id"/>
+        <result property="activityTypeName" column="activity_type_name"/>
+    </resultMap>
+    <select id="activityTypeName" resultMap="ActivityType_ResultMap">
+        select at.activity_type_name
+        from activity_type at
+    </select>
+
+</mapper>
