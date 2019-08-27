@@ -19,7 +19,7 @@
         <!-- 4 注册 所有的mapper.xml-->
         <property name="mapperLocations" value="classpath:mappers/**/*.xml" />
 
-        <property name="typeAliasesPackage" value="com.fzf.game.domain.entity"/>
+        <property name="typeAliasesPackage" value="com.fzf.game.domain"/>
     </bean>
 
     <!-- 5  注册  注册的Mapper.java -->
