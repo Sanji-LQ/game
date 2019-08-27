@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzf.game.mapper.ArticleMapper">
+
+  <resultMap id="BaseResultMap" type="com.fzf.game.domain.entity.Article">
+    <!--@mbg.generated-->
+    <id column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="aarticle_type_id" jdbcType="INTEGER" property="aarticleTypeId" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    a.article_id, a.article_type_id, a.content, a.article_title, a.create_time
+  </sql>
+
+  <resultMap id="BaseTypeRM" type="ArticleVo" extends="BaseResultMap">
+    <association property="articleType"
+                 resultMap="com.fzf.game.mapper.ArticleTypeMapper.BaseResultMap"/>
+  </resultMap>
+    <!--根据类型查找文章-->
+  <select id="findArticleByType" resultMap="BaseTypeRM">
+        SELECT  aty.article_type_name,a.article_title,a.create_time,a.article_id
+        FROM article a INNER JOIN article_type aty
+        ON a.article_type_id = aty.article_type_id
+        <if test="typeName != null and typeName != ''">
+          where aty.article_type_name = #{typeName}
+        </if>
+        order by a.create_time desc
+        <if test="index != null and index != ''">
+            limit 6
+        </if>
+  </select>
+    
+    <resultMap id="Details" type="ArticleVo" extends="BaseResultMap">
+        <association property="articleType"
+                     resultMap="com.fzf.game.mapper.ArticleTypeMapper.BaseResultMap"/>
+        <collection property="articleImageList"
+                    resultMap="com.fzf.game.mapper.ArticleImageMapper.BaseResultMap"/>
+    </resultMap>
+    <!--根据id查找文章详情-->
+    <select id="findArticleById" resultMap="Details">
+        SELECT aty.article_type_id,aty.article_type_name,a.article_id,a.create_time,a.article_title,a.content,
+               ai.article_image_id,ai.article_imae_url
+        FROM article_type aty
+            RIGHT JOIN article a ON aty.article_type_id = a.article_type_id
+            LEFT JOIN article_image ai ON a.article_id = ai.article_id
+            WHERE a.article_id = #{id}
+    </select>
+
+</mapper>

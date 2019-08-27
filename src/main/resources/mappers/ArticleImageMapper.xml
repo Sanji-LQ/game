@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzf.game.mapper.ArticleImageMapper">
+  <resultMap id="BaseResultMap" type="com.fzf.game.domain.entity.ArticleImage">
+    <!--@mbg.generated-->
+    <id column="article_image_id" jdbcType="INTEGER" property="articleImageId" />
+    <result column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="article_imae_url" jdbcType="VARCHAR" property="articleImaeUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    article_image_id, article_id, article_imae_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from article_image
+    where article_image_id = #{articleImageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from article_image
+    where article_image_id = #{articleImageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="article_image_id" keyProperty="articleImageId" parameterType="com.fzf.game.domain.entity.ArticleImage" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into article_image (article_id, article_imae_url)
+    values (#{articleId,jdbcType=INTEGER}, #{articleImaeUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="article_image_id" keyProperty="articleImageId" parameterType="com.fzf.game.domain.entity.ArticleImage" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into article_image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="articleImaeUrl != null">
+        article_imae_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="articleImaeUrl != null">
+        #{articleImaeUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fzf.game.domain.entity.ArticleImage">
+    <!--@mbg.generated-->
+    update article_image
+    <set>
+      <if test="articleId != null">
+        article_id = #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="articleImaeUrl != null">
+        article_imae_url = #{articleImaeUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where article_image_id = #{articleImageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fzf.game.domain.entity.ArticleImage">
+    <!--@mbg.generated-->
+    update article_image
+    set article_id = #{articleId,jdbcType=INTEGER},
+      article_imae_url = #{articleImaeUrl,jdbcType=VARCHAR}
+    where article_image_id = #{articleImageId,jdbcType=INTEGER}
+  </update>
+</mapper>

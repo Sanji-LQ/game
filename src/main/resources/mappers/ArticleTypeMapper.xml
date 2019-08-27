@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzf.game.mapper.ArticleTypeMapper">
+
+  <resultMap id="BaseResultMap" type="com.fzf.game.domain.entity.ArticleType">
+    <!--@mbg.generated-->
+    <id column="article_type_id" jdbcType="INTEGER" property="articleTypeId" />
+    <result column="article_type_name" jdbcType="VARCHAR" property="articleTypeName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    aty.article_type_id, aty .article_type_name
+  </sql>
+
+
+
+
+</mapper>
