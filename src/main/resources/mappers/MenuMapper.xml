@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzf.game.mapper.MenuMapper">
+  <resultMap id="BaseMenuMap" type="com.fzf.game.domain.entity.Menu">
+    <!--@mbg.generated-->
+    <id column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="cart_id" jdbcType="INTEGER" property="cartId" />
+  </resultMap>
+  <insert id="createMenu">
+    insert into menu (order_id, cart_id) values (#{orderId},#{cartId})
+  </insert>
+  <select id="findMenu" resultMap="BaseMenuMap">
+    select *from menu
+    where order_id=#{orderId}
+  </select>
+
+</mapper>

@@ -6,20 +6,6 @@
     <result column="big_type_name" jdbcType="VARCHAR" property="bigTypeName" />
   </resultMap>
 
-  <resultMap id="AllTypeResult" type="com.fzf.game.domain.vo.BigTypeVo" extends="BaseBigTypeMap">
-    <collection property="smallTypeList"
-                ofType="com.fzf.game.domain.vo.SmallTypeVo"
-                resultMap="com.fzf.game.mapper.SmallTypeMapper.BaseSmallVo">
-    </collection>
-  </resultMap>
-
-
-  <select id="findAll" resultMap="AllTypeResult">
-      SELECT *
-      FROM category c
-      LEFT JOIN  sub_menu sm ON c.cate_id = sm.cate_id
-      LEFT JOIN sub_menu1 sm1 ON sm.sub_menu_id = sm1.sub_menu_id
-  </select>
   <select id="findByBigTypeId" resultMap="com.fzf.game.mapper.ShopMapper.BaseShopMap">
     SELECT *
     from big_type b
@@ -37,5 +23,4 @@
       and c.small_type_id =#{smallTypeId}
       limit #{page},#{size}
   </select>
-
 </mapper>

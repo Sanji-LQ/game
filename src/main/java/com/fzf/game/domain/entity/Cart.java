@@ -15,11 +15,6 @@ public class Cart {
 
     private Date createDate;
 
-    /**
-    * 0为未支付
-1为已支付
-    */
-    private Integer status;
 
     /**
     * 0为存在 1为假删除

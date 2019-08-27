@@ -1,4 +1,4 @@
-package com.vip.bdshop.utils;
+package com.fzf.game.utils;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.vip.bdshop.service.impl;
+package com.fzf.game.service.impl;
 
 
 
@@ -7,8 +7,6 @@ import com.fzf.game.domain.vo.ShopVo;
 import com.fzf.game.mapper.BigTypeMapper;
 import com.fzf.game.mapper.ShopMapper;
 import com.fzf.game.service.IndexService;
-import com.vip.bdshop.service.IndexService;
-import com.vip.bdshop.utils.CateBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -55,17 +53,21 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public List<Shop> findShop(int id, int i,int page,int size) {
+        List<Shop> list=new ArrayList<>();
         if(page == 0){
             page=1;
         }
         if(size == 0){
             size=10;
         }
-        List<Shop> list=new ArrayList<>();
-        if(i == 1){
-            list=bigTypeMapper.findByBigTypeId(id,page-1,size);
-        }else if(i == 2) {
-            list = bigTypeMapper.findBySmallTypeId(id, page - 1, size);
+        if(id !=0&&i!=0){
+            if(i == 1){
+                list=bigTypeMapper.findByBigTypeId(id,page-1,size);
+            }else if(i == 2) {
+                list = bigTypeMapper.findBySmallTypeId(id, page - 1, size);
+            }
+        }else {
+            list=shopMapper.findAll(page-1,size);
         }
         return list;
     }

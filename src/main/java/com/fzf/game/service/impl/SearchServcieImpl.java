@@ -2,7 +2,7 @@ package com.fzf.game.service.impl;
 
 import com.fzf.game.domain.entity.Shop;
 import com.fzf.game.mapper.ShopMapper;
-import com.vip.bdshop.service.SearchServcie;
+import com.fzf.game.service.SearchServcie;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

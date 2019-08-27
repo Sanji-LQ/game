@@ -8,7 +8,6 @@ public class Img {
 
     private String imgName;
 
-    private Integer imagesId;
+    private Integer shopId;
 
-    private String imgType;
 }

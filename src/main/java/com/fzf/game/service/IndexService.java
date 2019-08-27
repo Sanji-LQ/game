@@ -4,7 +4,6 @@ package com.fzf.game.service;
 
 import com.fzf.game.domain.entity.Shop;
 import com.fzf.game.domain.vo.ShopVo;
-import com.vip.bdshop.utils.CateBean;
 
 import java.util.List;
 

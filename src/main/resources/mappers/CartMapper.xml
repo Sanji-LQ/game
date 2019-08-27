@@ -8,8 +8,46 @@
     <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="shop_id" jdbcType="INTEGER" property="shopId" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
+    <select id="findCartByUid" resultMap="BaseResultMap">
+      select * from cart c
+      left join shop s
+      on c.shop_id = s.shop_id
+      where c.is_delete = 0
+      <if test="cart.uid != null"> and c.uid =#{cart.uid}</if>
+      <if test="cart.cartId != null"> and c.cart_id =#{cart.cartId}</if>
+      <if test="cart.shopId != null"> and c.shop_id =#{cart.shopId}</if>
+    </select>
 
+  <insert id="addCart">
+    insert into cart
+    ( uid,shop_id,num) values
+    (#{cart.uid} ,#{cart.shopId}, #{cart.num})
+  </insert>
+
+  <update id="addCarts">
+    update cart
+    set num =num + #{cart.num}
+    where cart_id = #{cart.uid}
+    and shop_id =#{cart.shopId}
+  </update>
+
+
+  <update id="increaseNumber">
+    update cart
+    set num = num + 1
+    where cart_id = #{cart.cartId}
+  </update>
+
+  <update id="decreaseNumber">
+    update cart
+    set num = num - 1
+    where cart_id = #{cart.cartId}
+  </update>
+
+  <delete id="deleteCart">
+    update cart set is_delete = 1
+    where cart_id = #{cart.cartId}
+  </delete>
 </mapper>

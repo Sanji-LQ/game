@@ -11,17 +11,26 @@
     <result column="original_price" jdbcType="DOUBLE" property="originalPrice" />
     <result column="present_price" jdbcType="DOUBLE" property="presentPrice" />
   </resultMap>
+  <resultMap id="BaseShopVo" type="com.fzf.game.domain.vo.ShopVo" extends="BaseShopMap">
+    <collection property="shopImages" resultMap="com.fzf.game.mapper.ImgMapper.BaseImgMap">
+    </collection>
+  </resultMap>
+
+
+  <select id="findAll" resultMap="BaseShopMap">
+      SELECT *
+      FROM  shop s
+      limit #{page},#{size}
+  </select>
+
   <select id="findByKeyWord" resultMap="BaseShopMap">
     select * from shop
-    where shop_name like '%#{keyword}%'
+    where shop_name like '%${keyword}%'
   </select>
-  <select id="findShop" resultType="com.fzf.game.domain.vo.ShopVo">
+  <select id="findShop" resultMap="BaseShopVo">
     select * from shop s
-    left join big_type b on s.big_type_id =b.big_type_id
-    left join small_type s1 on s1.big_type_id= b.big_type_id
-    LEFT JOIN concrete_type c on c.small_type_id = s1.small__type_id
-    left join shop_image si on s.shop_id = si.shop_id
-    where  s.shop_id=c.shop_id and s.shop_id = #{shopId}
+    left join img i on s.shop_id = i.shop_id
+    where   s.shop_id = #{shopId}
   </select>
 
 </mapper>

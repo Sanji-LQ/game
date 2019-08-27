@@ -4,17 +4,19 @@ package com.fzf.game.controller;
 import com.fzf.game.domain.entity.Shop;
 import com.fzf.game.domain.vo.ShopVo;
 import com.fzf.game.service.IndexService;
+import com.fzf.game.utils.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.vip.bdshop.utils.Result;
+
 
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/game/shop")
+@RequestMapping("/game/v1")
 public class ShopIndexController {
     @Resource
     IndexService indexService;
@@ -35,7 +37,7 @@ public class ShopIndexController {
     }
 
     /**
-     * 首页分类下商品信息
+     * 首页分类下商品信息展示
      *
      * @return
      */
@@ -50,10 +52,16 @@ public class ShopIndexController {
     }
 
     /**
+     *
+     * 全部商品
+     *
      * 每个分类的商品
      */
-    @GetMapping(value = "/contentList",params = {"id","i","page","size"})
-    public Result findShop(int id ,int i,int page,int size){
+    @GetMapping(value = "/contentList")
+    public Result findShop(@RequestParam(value = "id",defaultValue = "0")int id
+            ,@RequestParam(value = "i",defaultValue = "0")int i
+            ,@RequestParam(value = "page",defaultValue = "0") int page
+            ,@RequestParam(value = "size",defaultValue = "0") int size){
         try{
             List<Shop> shops = indexService.findShop(id,i,page,size);
             return Result.success(shops);
@@ -76,5 +84,4 @@ public class ShopIndexController {
             return Result.error();
         }
     }
-
 }

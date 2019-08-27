@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzf.game.mapper.OrderMapper">
+  <resultMap id="BaseOrdertMap" type="com.fzf.game.domain.entity.Orders">
+    <!--@mbg.generated-->
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="status" jdbcType="INTEGER" property="status"/>
+    <result column="total_price" jdbcType="DOUBLE" property="totalPrice" />
+  </resultMap>
+
+  <resultMap id="BaseOrderVo" type="com.fzf.game.domain.vo.OrdersVo">
+    <collection property="menus" ofType="com.fzf.game.domain.entity.Menu"
+                resultMap="com.fzf.game.mapper.MenuMapper.BaseMenuMap"></collection>
+  </resultMap>
+
+  <insert id="createOrder">
+    insert into orders (uid, total_price) values (#{cart.uid},#{totalPrice})
+  </insert>
+
+  <select id="findOrder" resultType="com.fzf.game.domain.vo.OrdersVo">
+    select * from orders o
+    left join menu m on o.order_id = m.order_id
+    where o.status=0
+    and o.order_id=#{orderId}
+  </select>
+  <update id="cancleOrder">
+    update orders
+    set status = 3
+    where order_id=#{orderId}
+  </update>
+  <update id="completeOrder">
+    update orders
+    set status = 2
+    where order_id=#{orderId}
+  </update>
+
+</mapper>
