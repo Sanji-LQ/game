@@ -18,12 +18,15 @@ public class indexActivityImpl implements indexActivity {
     @Resource
     ActivityTypeMapper activityTypeMapper;
     @Override
-    public ActivityMes queryActivity(int typeId) {
-        ActivityMes activityMes=new ActivityMes();
+    public List<Activity> queryActivity(int typeId) {
         List<Activity> activities = activityMapper.queryActivity(typeId);
-        List<ActivityType> activityTypes = activityTypeMapper.activityTypeName();
-        activityMes.setActivityList(activities);
-        activityMes.setActivityType(activityTypes);
-        return activityMes;
+        return activities;
+    }
+
+    @Override
+    public List<Activity> queryAll(int page,int size) {
+        int newPage=(page-1)*size;
+        List<Activity> activities = activityMapper.queryAll(newPage,size);
+        return activities;
     }
 }

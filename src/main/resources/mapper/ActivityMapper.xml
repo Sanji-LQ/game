@@ -15,9 +15,17 @@
     </resultMap>
 
     <select id="queryActivity" resultMap="Activity_ResultMapper">
-        select a.activity_name,a.activity_create_time,a.activity_dead_time,a.reword_image
+        select a.activity_id,a.activity_name,a.activity_create_time,a.activity_dead_time,a.reword_image
         from activity a
         where a.activity_type_id=#{typeId} and a.is_delete =0
     </select>
+    <select id="queryAll" resultMap="Activity_ResultMapper">
+        select a.activity_id,a.activity_create_time,a.activity_dead_time,a.activity_title
+        from activity a
+        where a.is_delete =0
+        limit page=#{page},size=#{size}
+    </select>
+
+
 
 </mapper>
